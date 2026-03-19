@@ -1,0 +1,3 @@
+# Copy this file to terraform.tfvars and provide your subscription ID
+
+subscription_id = "your-subscription-id"

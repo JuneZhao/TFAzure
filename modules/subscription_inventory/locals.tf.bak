@@ -1,0 +1,39 @@
+locals {
+
+  graph_raw  = data.external.resource_graph.result.result
+  graph_data = jsondecode(local.graph_raw)
+
+  # ✅ 只遍历 data 数组
+  resources = local.graph_data.data
+
+  resource_groups = distinct([
+    for r in local.resources :
+    r.resourceGroup
+    if r.resourceGroup != null
+  ])
+
+  resources_by_rg = {
+    for rg in local.resource_groups :
+    rg => {
+      resources = [
+        for r in local.resources :
+        {
+          name     = r.name
+          type     = r.type
+          location = r.location
+          tags     = r.tags
+        }
+        if r.resourceGroup == rg
+      ]
+    }
+  }
+
+  inventory = {
+    subscription = {
+      id   = data.azurerm_subscription.current.subscription_id
+      name = data.azurerm_subscription.current.display_name
+    }
+
+    resource_groups = local.resources_by_rg
+  }
+}

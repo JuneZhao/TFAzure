@@ -1,0 +1,19 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+
+# Generated artifacts
+inventory.json
+summary.json
+inventory_report.md
+
+# Local variables
+*.auto.tfvars
+terraform.tfvars
+
+# OS files
+.DS_Store
+Thumbs.db
