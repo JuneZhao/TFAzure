@@ -10,6 +10,10 @@ output "markdown_report" {
   value = module.subscription_inventory.markdown_report
 }
 
+output "top_cost_resources" {
+  value = module.subscription_inventory.top_cost_resources
+}
+
 resource "local_file" "inventory_json" {
   content  = jsonencode(module.subscription_inventory.inventory)
   filename = "${path.root}/inventory.json"

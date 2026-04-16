@@ -4,7 +4,16 @@ data "azurerm_subscription" "current" {}
 
 data "external" "resource_graph" {
   program = [
+    "bash",
     "${path.module}/../../query_resources.sh",
+    data.azurerm_subscription.current.subscription_id
+  ]
+}
+
+data "external" "costs" {
+  program = [
+    "bash",
+    "${path.module}/../../query_costs.sh",
     data.azurerm_subscription.current.subscription_id
   ]
 }

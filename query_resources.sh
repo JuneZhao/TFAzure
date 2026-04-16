@@ -16,7 +16,7 @@ if ! command -v az &>/dev/null; then
 fi
 
 if ! RESULT=$(az graph query \
-  -q "Resources | project name, type, resourceGroup, location, tags" \
+  -q "Resources | project id, name, type, resourceGroup, location, tags" \
   --subscriptions "$SUBSCRIPTION_ID" \
   -o json 2>&1); then
   echo "query_resources.sh: az graph query failed:" >&2
