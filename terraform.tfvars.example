@@ -1,3 +1,5 @@
-# Copy this file to terraform.tfvars and provide your subscription ID
+# Copy this file to terraform.tfvars and provide your values
 
-subscription_id = "your-subscription-id"
+managed_identity_client_id = "your-managed-identity-client-id"
+subscription_id            = "your-subscription-id"
+tenant_id                  = "your-tenant-id"
