@@ -1,5 +1,7 @@
 # Azure Subscription Inventory
 
+[English README](README.en.md)
+
 基于 Terraform + Azure AzAPI Provider 的订阅资源盘点、成本排行与告警工具。
 **纯 Terraform 实现**（不依赖 `az` / `jq` / `python3`），支持**多订阅**聚合、**成本告警**与**历史快照归档**。
 
