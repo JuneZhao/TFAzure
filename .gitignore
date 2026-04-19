@@ -4,8 +4,11 @@
 *.tfstate.*
 terraform.tfstate
 terraform.tfstate.backup
+crash.log
+crash.*.log
 
-# Generated artifacts
+# Generated reports
+reports/
 inventory.json
 summary.json
 inventory_report.md

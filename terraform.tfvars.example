@@ -1,5 +1,39 @@
-# Copy this file to terraform.tfvars and provide your values
+# Copy to terraform.tfvars and fill in real values.
+# terraform.tfvars is .gitignored - never commit real IDs.
 
-managed_identity_client_id = "your-managed-identity-client-id"
-subscription_id            = "your-subscription-id"
-tenant_id                  = "your-tenant-id"
+# ---------- Required ----------
+tenant_id = "00000000-0000-0000-0000-000000000000"
+
+subscription_ids = [
+  "00000000-0000-0000-0000-000000000000",
+  # "11111111-1111-1111-1111-111111111111",
+]
+
+# ---------- Authentication ----------
+# Preferred: leave use_msi=false and authenticate via
+#   a) az login (local dev), or
+#   b) ARM_CLIENT_ID / ARM_CLIENT_SECRET / ARM_TENANT_ID / ARM_SUBSCRIPTION_ID env vars
+# Only set use_msi=true when running on an Azure VM / Container / CI runner
+# that has a User-Assigned Managed Identity attached.
+use_msi                    = false
+managed_identity_client_id = ""
+
+# ---------- Reporting ----------
+top_n_cost_resources = 10
+cost_timeframe       = "Last7Days"   # also: MonthToDate, BillingMonthToDate
+cost_type            = "AmortizedCost" # or: ActualCost
+reports_dir          = "reports"
+
+# ---------- Cost Alerts ----------
+# 0 disables alerting. Any resource whose cost in the selected timeframe
+# exceeds this value will be flagged in the "Cost Alerts" Markdown section
+# and the summary.over_threshold_resources output. Units follow the billing
+# currency returned by Cost Management.
+cost_alert_threshold = 0
+
+# ---------- History / Archival ----------
+# When true, each apply copies the freshly generated reports/ tree into
+# reports/_history/<timestamp>/ so you can diff snapshots over time.
+# Requires bash + cp on the host running Terraform.
+enable_history           = false
+history_timestamp_format = "YYYY-MM-DD'T'hhmmss'Z'"
